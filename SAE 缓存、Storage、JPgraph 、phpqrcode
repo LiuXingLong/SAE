@@ -1,0 +1,61 @@
+<?php
+use sinacloud\sae\Storage as Storage;
+$s = new Storage();
+
+// Bucket操作
+/* 
+创建 bucket
+$bucketName=22;
+$s->putBucket($bucketName);
+*/
+
+/*
+获取 bucket 列表
+$list=$s->listBuckets();
+var_dump($list);
+*/
+
+/* 
+获取 Bucket中的 Object对象列表
+$list=$s->getBucket("public");
+var_dump($list);
+*/
+
+/*
+获取 Bucket中的   Public/imagePeople/ 目录下所有的文件（Object）
+$list=$s->getBucket("public", 'Public/imagePeople/', null, 10, '/');
+var_dump($list);
+*/
+
+/*
+删除一个空的Bucket
+$s->deleteBucket("22");
+*/
+
+
+
+
+
+// Object操作
+/*
+显示 Object 信息
+$info=$s->getObjectInfo("public","image/1105010107.jpg");
+var_dump($info);
+echo "<br/>";
+$info=$s->getObjectInfo("public","image/1.jpg");
+var_dump($info);
+*/
+
+/*
+上传并设置 Object 信息
+$img=file_get_contents('http://p2.so.qhimg.com/t01a72c92367b76d522.jpg');  //括号中的为远程图片地址
+$input=array();
+$input['data']=$img;
+$input['type']='image/jpeg';
+$s->putObject($input ,"public","image/22.jpg");
+*/
+
+/*
+删除 Object
+$s->deleteObject("public","image/22.jpg");
+*/
