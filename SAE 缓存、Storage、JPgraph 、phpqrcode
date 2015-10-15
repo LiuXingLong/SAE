@@ -94,3 +94,21 @@ DEFINE('TTF_DIR','/usr/X11R6/lib/X11/fonts/truetype/');
 //列如： DEFINE('TTF_DIR','/data1/www/htdocs/27/love218/1/Fonts/');        
      
 ?>
+
+<?php
+//SAE 上使用 phpqrcode 生成的二维码存储问题
+
+use sinacloud\sae\Storage as Storage;
+$s = new Storage();
+vendor('phpqrcode.phpqrcode');   
+        
+$pic_code = "/saetmp/27/love218/code.jpg"; // SAE缓存文件地址
+
+$uuid = md5(\Org\Util\String::uuid()).session_id();  
+\QRcode::png ( $uuid,$pic_code,'M', 16 );  // 将生成的二维码存入 SAE 缓存文件地址
+$input=array();
+$input['data']=file_get_contents($pic_code); // 读取SAE上缓存的二维码文件
+$input['type']='image/jpeg';
+$s->putObject($input ,"public","Code2/code.jpg"); // 将读取的SAE上缓存的二维码文件  存入SAE上的 Storage  以便调用
+
+?>
