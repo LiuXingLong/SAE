@@ -1,4 +1,24 @@
 <?php
+// SAE 缓存  用来处理验证码缓存
+
+$filepath = sys_get_temp_dir(); // 获取 SAE 文件路径   可将缓存文件存入
+var_dump($filepath);
+
+$picContent="文件类容";
+$picName = md5(time());            
+$verPic = $filepath."$picName".".jpg";                 
+$fp = fopen($verPic, "w");
+fwrite($fp, $picContent);
+fclose($fp);
+
+// 读取文件内容并输出
+$str=file_get_contents($verPic);
+echo $str;
+
+?>
+
+<?php
+// SAE  Storage 使用
 use sinacloud\sae\Storage as Storage;
 $s = new Storage();
 
@@ -59,3 +79,18 @@ $s->putObject($input ,"public","image/22.jpg");
 删除 Object
 $s->deleteObject("public","image/22.jpg");
 */
+
+?>
+
+
+<?php
+//SAE 上使用 JPgraph 
+
+echo getcwd() . "<br/>";  // 输出当前路径
+
+// 将 jpgraph.php 下面代码修改到 SAE 用路径然后新建 Fonts 文件夹，并将 arialbd.ttf  和 simhei.ttf 存入改文件夹中
+
+DEFINE('TTF_DIR','/usr/X11R6/lib/X11/fonts/truetype/'); 
+//列如： DEFINE('TTF_DIR','/data1/www/htdocs/27/love218/1/Fonts/');        
+     
+?>
